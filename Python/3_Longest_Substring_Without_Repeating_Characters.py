@@ -24,9 +24,9 @@ class Solution:
         pos = {}
         
         for i, c in enumerate(s):
-            if c in pos and pos[c] > left:
-                left = pos[c]
+            if c in pos:
+                left = max(pos[c], left)
             pos[c] = i
-            maxLen = i-left if i-left > maxLen else maxLen
+            maxLen = max(i-left, maxLen)
             
         return maxLen

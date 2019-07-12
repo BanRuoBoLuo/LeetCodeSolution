@@ -23,7 +23,6 @@ public:
     int reverse(int x) {
         long long res = 0;
         for (; x != 0; x /= 10)
-            cout << x <<"/10 = " << x/10 <<", with mod = "<< x%10 <<endl;
             res = res * 10 + x % 10;
         return res > INT_MAX || res < INT_MIN ? 0 : res;
     }

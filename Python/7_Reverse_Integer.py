@@ -27,3 +27,15 @@ class Solution:
         y = y if positive else -y
         return y if y < 2**31-1 and y > -2**31 else 0
             
+
+    def reverse2(self, x: int) -> int:
+        if x < 0: 
+            n = self.reverse(0-x) 
+            return -n if n <= 2**31 else 0
+        
+        s = str(x)[::-1]
+        n = int(s)
+        return n if n < 2**31 else 0
+        
+    
+        
