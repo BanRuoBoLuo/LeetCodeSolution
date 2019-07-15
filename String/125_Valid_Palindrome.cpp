@@ -1,4 +1,7 @@
 /*************************************************************************
+125. Valid Palindrome
+Easy
+
 Given a string, determine if it is a palindrome, considering only alphanumeric
  characters and ignoring cases.
 For example,
@@ -23,6 +26,6 @@ public:
   			left ++; right --;
   		}
   	}
-  	reutrn true;
+  	return true;
   }
 };
