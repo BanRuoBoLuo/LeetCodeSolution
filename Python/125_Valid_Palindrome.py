@@ -25,3 +25,9 @@ class Solution:
         
         string = ''.join(c.lower() for c in s if c.isalnum())
         return string == string[::-1]
+
+    def isPalindrome2(self, s: str) -> bool:
+
+        s = s.lower()
+        s = ''.join(list(filter(lambda x: x.isalnum(), s)))
+        return s == s[::-1]
