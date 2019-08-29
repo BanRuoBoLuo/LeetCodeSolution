@@ -23,9 +23,7 @@ The binary representation of 7 is: 111.
 class Solution {
 public:
     bool hasAlternatingBits(int n) {
-        int t = n ^ (n>>1);
-        
-        if(t==0x7fffffff) return true;
+        unsigned int t = n ^ (n>>1);
         return (t & (t+1)) == 0;
     }
 };
