@@ -1,0 +1,33 @@
+unordered_map has no rbegin() nor rend()
+unordered_map key must be hashable
+
+Consider map instead
+
+
+
+
+split strings by char delimeter
+
+        std::string token;
+        char delimeter;
+        std::istringstream tokenStream(str);
+        while (std::getline(tokenStream, token, delimeter)) {
+            // handle token
+        }
+
+
+
+split strings by space
+
+        std::string token;
+        std::stringstream tokenStream(str);
+        while (tokenStream >> token) {
+            // handle token
+        }
+
+
+// middle of LinkList
+
+0       1       2       3       4       5       6       7   nullptr
+fast            fast            fast            fast        fast 
+slow    slow    slow    slow    slow   

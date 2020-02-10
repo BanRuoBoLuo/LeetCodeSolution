@@ -23,6 +23,32 @@ Note:
 class Solution {
 public:
     int findUnsortedSubarray(vector<int>& nums) {
+        if(nums.size() <= 1) return 0;
+        
+        int pivot = nums[0];
+        int rgt = -1;
+        for(int i=1; i<nums.size(); i++) {
+            if(pivot <= nums[i]){
+                pivot = nums[i];
+            } else {
+                rgt = i;
+            }
+        }
+        if(rgt == -1) return 0;
+        
+        int lft = -1;
+        pivot = nums.back();
+        for(int i=nums.size()-2; i>=0; i--) {
+            if(pivot >= nums[i]) {
+                pivot = nums[i];
+            } else {
+                lft = i;
+            }
+        }
+        return rgt-lft+1;
+    }
+    
+    int findUnsortedSubarray2(vector<int>& nums) {
         
         vector<int> sorted(nums);
         sort(sorted.begin(), sorted.end());

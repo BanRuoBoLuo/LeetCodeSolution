@@ -37,29 +37,35 @@ public:
     
     /** Push element x to the back of queue. */
     void push(int x) {
-        while(!popQueue.empty()){
-            pushQueue.push(popQueue.top());
-            popQueue.pop();
-        }
         pushQueue.push(x);
     }
     
     /** Removes the element from in front of queue and returns that element. */
     int pop() {
+        if(!popQueue.empty()) {
+            return popFromQueue();
+        }
+        
         while(!pushQueue.empty()){
             popQueue.push(pushQueue.top());
             pushQueue.pop();
         }
-        int rst = -1;
-        if(!popQueue.empty()) {
-            rst = popQueue.top();
-            popQueue.pop();
-        }
-        return rst;
+
+        return popFromQueue();
+    }
+    
+    int popFromQueue(){
+        int x = popQueue.top();
+        popQueue.pop();
+        return x;
     }
     
     /** Get the front element. */
     int peek() {
+        if(!popQueue.empty()) {
+            return popQueue.top();
+        }
+        
         while(!pushQueue.empty()){
             popQueue.push(pushQueue.top());
             pushQueue.pop();

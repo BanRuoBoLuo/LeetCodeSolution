@@ -1,5 +1,5 @@
 /*******************************************************************************************
-55. Min Stack
+155. Min Stack
 Easy
 
 Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
@@ -21,41 +21,44 @@ minStack.getMin();   --> Returns -3.
 minStack.pop();
 minStack.top();      --> Returns 0.
 minStack.getMin();   --> Returns -2.
-*******************************************************************************************/
+
+ *******************************************************************************************/
+
 
 class MinStack {
 public:
     /** initialize your data structure here. */
     MinStack() {
-        currentMin = INT_MAX;
     }
     
     void push(int x) {
-        if (x <= currentMin) {
-            minStack.push(currentMin);
-            currentMin = x;
+        dataStack.push(x);
+
+        if(minStack.empty() || minStack.top() >= x){
+            minStack.push(x);
         }
-        minStack.push(x);
     }
     
     void pop() {
-        if(minStack.top() == currentMin) {
-            minStack.pop();
-            currentMin = minStack.top(); 
+        if(dataStack.empty()) {
+            return;
         }
-        minStack.pop();
+        
+        int x = dataStack.top();
+        dataStack.pop();
+        if(x == minStack.top()) minStack.pop();
     }
     
     int top() {
-        return minStack.top();
+        return dataStack.top();
     }
     
     int getMin() {
-        return currentMin;
+        return minStack.top();
     }
     
     stack<int> minStack;
-    int currentMin;
+    stack<int> dataStack;
 };
 
 /**
@@ -66,4 +69,3 @@ public:
  * int param_3 = obj->top();
  * int param_4 = obj->getMin();
  */
-
