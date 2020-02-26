@@ -1,4 +1,4 @@
-/*******************************************************************************************
+/******************************************************************************************
 994. Rotting Oranges
 Easy
 
@@ -39,9 +39,8 @@ Note:
     1 <= grid[0].length <= 10
     grid[i][j] is only 0, 1, or 2.
 
-*******************************************************************************************/
 
-
+******************************************************************************************/
 
 class Solution {
 public:
@@ -62,38 +61,34 @@ public:
             }
         }
         
-        int minute = 0;
+        if(fresh == 0) return 0;
+        
+        int steps = 0;
         while(!rt.empty()) {
-            
+            steps ++;
             int sz = rt.size();
             for(int k=0; k<sz; k++) {
-                pair<int, int> p = rt.front(); rt.pop();
-                int i=p.first, j = p.second;
-                if(isValid(i+1, j, M, N) && grid[i+1][j] == 1) {
-                    grid[i+1][j] = 2; fresh --;
-                    rt.push(make_pair(i+1, j));
-                } 
-                if(isValid(i-1, j, M, N) && grid[i-1][j] == 1) {
-                    grid[i-1][j] = 2; fresh --;
-                    rt.push(make_pair(i-1, j));
-                }
-                if(isValid(i, j+1, M, N) && grid[i][j+1] == 1) {
-                    grid[i][j+1] = 2; fresh --;
-                    rt.push(make_pair(i, j+1));
-                }
-                if(isValid(i, j-1, M, N) && grid[i][j-1] == 1) {
-                    grid[i][j-1] = 2; fresh --;
-                    rt.push(make_pair(i, j-1));
-                }
+                int i = rt.front().first, j = rt.front().second; rt.pop();
+                if(traverse(i+1, j, grid, fresh)) rt.push(make_pair(i+1, j));
+                if(traverse(i-1, j, grid, fresh)) rt.push(make_pair(i-1, j));
+                if(traverse(i, j+1, grid, fresh)) rt.push(make_pair(i, j+1));
+                if(traverse(i, j-1, grid, fresh)) rt.push(make_pair(i, j-1));
             }
-            if(!rt.empty())minute ++;
         }
         
         if(fresh > 0) return -1;
-        return minute;
+        return steps-1;
     }
     
-    bool isValid(int i, int j, int M, int N) {
-        return i>=0 && i<M && j >= 0 && j <N;
+    bool traverse(int i, int j, vector<vector<int>>& grid, int& fresh) {
+        if(grid.empty()) return false;
+        
+        int M = grid.size(), N = grid[0].size();
+        if(i<0 || i>=M || j < 0 || j >= N ) return false;
+        if(grid[i][j] == 0 || grid[i][j] == 2) return false;
+        
+        grid[i][j] = 2;
+        --fresh;
+        return true;
     }
 };

@@ -53,4 +53,29 @@ public:
         }
         return result;
     }
+
+    vector<int> nextGreaterElement2(vector<int>& nums1, vector<int>& nums2) {
+        //traverse right to left
+        unordered_map<int, int> nextGreater;
+        stack<int> nextGreaterStack;
+        
+        for(int i=nums2.size()-1; i>=0; i--) {
+            while(!nextGreaterStack.empty() && nextGreaterStack.top() <= nums2[i]) {
+                nextGreaterStack.pop();
+            }
+            
+            if(nextGreaterStack.empty()) {
+                nextGreater[nums2[i]] = -1;
+            } else {
+                nextGreater[nums2[i]] = nextGreaterStack.top();
+            }
+            nextGreaterStack.push(nums2[i]);
+        }
+        
+        vector<int> result;
+        for(int x: nums1){
+            result.push_back(nextGreater[x]);
+        }
+        return result;
+    }
 };
