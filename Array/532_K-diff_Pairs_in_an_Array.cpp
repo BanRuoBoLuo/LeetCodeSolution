@@ -49,4 +49,25 @@ public:
         }
         return rst;
     }
+
+        int findPairs2(vector<int>& nums, int k) {
+        if(k < 0) return 0;
+        
+        sort(nums.begin(), nums.end());
+        
+        int lft = 0, rgt = 1;
+        int cnt = 0;
+        while(rgt < nums.size()) {
+            int d = nums[rgt] - nums[lft];
+            if (d < k) rgt ++;
+            else if ( d > k) lft ++;
+            else {
+                if(lft != rgt)cnt ++;
+                lft ++; 
+                while(lft < nums.size() && nums[lft] == nums[lft-1]) lft ++;
+                rgt = lft + 1;
+            }
+        }
+        return cnt;
+    }
 };
