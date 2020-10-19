@@ -32,7 +32,26 @@ Explanation: The answer is "wke", with the length of 3.
 
 class Solution {
 public:
-    int lengthOfLongestSubstring(string s) {
+    int lengthOfLongestSubstring(const string& s) {
+        if(s.empty()) return 0;
+        
+        unordered_map<char, int> idx;
+        
+        int len = 0; 
+        int start = 0;
+
+        for(int i=0; i<s.size(); i++) {
+            if(idx.find(s[i]) != idx.end() && idx[s[i]] >= start) {
+                len = max(len, i-start);
+                start = idx[s[i]]+1;
+            }
+            idx[s[i]] = i;
+        }
+        
+        return max(len, (int)s.size()-start);
+    }
+
+    int lengthOfLongestSubstring2(const string& s) {
         if(s.size() < 2) return s.size();
         
         int result = 1;
